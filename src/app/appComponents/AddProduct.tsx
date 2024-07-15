@@ -53,18 +53,17 @@ const FormSchema = z.object({
         defaultValues: {
             nome: "",
             descricao: "",
-            preco: 0
         },
       })
     
       function onSubmit(data: z.infer<typeof FormSchema>) {
-        axiosConfig.post('/produto', data).then((response) => {
+        axiosConfig.post('/produto', data).then((response: any) => {
             console.log(response.data)
             toast.success("Produto adicionado com sucesso")
             setTimeout(() => {
               window.location.reload();
           }, 3000);
-        }).catch((error) => {
+        }).catch((error : any) => {
             console.error(error)
             toast.error("Erro ao adicionar produto")
         })

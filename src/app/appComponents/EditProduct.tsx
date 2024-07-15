@@ -40,22 +40,19 @@ const FormSchema = z.object({
 
   export function EditProduct({idProduto}: {idProduto: number}) {
 
-    const[nome, setNome] = useState(null)
-    const[descricao, setDescricao] = useState(null)
+    const[nome, setNome] = useState("")
+    const[descricao, setDescricao] = useState("")
     const[preco, setPreco] = useState(null)
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
-            nome: null,
-            descricao: null,
-            preco: null
         },
       })
 
     const getProductData = async() =>{
         try {
-            await axiosConfig.get('/produto/' + idProduto).then((response) => {
+            await axiosConfig.get('/produto/' + idProduto).then((response : any) => {
                 setNome(response.data.nome)
                 setDescricao(response.data.descricao)
                 setPreco(response.data.preco)
@@ -72,13 +69,13 @@ const FormSchema = z.object({
 
       function onSubmit(data: z.infer<typeof FormSchema>) {
         console.log(data)
-        axiosConfig.patch('/produto/' + idProduto, data).then((response) => {
+        axiosConfig.patch('/produto/' + idProduto, data).then((response : any) => {
             console.log(response.data)
             toast.success("Produto editado com sucesso")
             setTimeout(() => {
               window.location.reload();
           }, 3000);
-        }).catch((error) => {
+        }).catch((error : any) => {
             console.error(error)
             toast.error("Produto não editado")
         })
@@ -98,7 +95,7 @@ const FormSchema = z.object({
                         <FormField
                         control={form.control}
                         name="nome"
-                        render={({ field }) => (
+                        render={({ field } : {field : any}) => (
                             <FormItem>
                             <FormLabel>Nome</FormLabel>
                             <FormControl>
@@ -111,7 +108,7 @@ const FormSchema = z.object({
                         <FormField
                         control={form.control}
                         name="descricao"
-                        render={({ field }) => (
+                        render={({ field } : {field : any}) => (
                             <FormItem>
                             <FormLabel>Descrição</FormLabel>
                             <FormControl>
@@ -124,11 +121,11 @@ const FormSchema = z.object({
                         <FormField
                         control={form.control}
                         name="preco"
-                        render={({ field }) => (
+                        render={({ field } : {field : any}) => (
                             <FormItem>
                             <FormLabel>Preço</FormLabel>
                             <FormControl>
-                                <Input type="number" placeholder={"Atual: " + preco} {...field} />
+                              <Input type="number" placeholder={"Atual: " + preco} {...field}/>
                             </FormControl>
                             <FormMessage />
                             </FormItem>

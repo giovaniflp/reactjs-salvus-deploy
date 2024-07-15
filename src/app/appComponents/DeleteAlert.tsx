@@ -20,7 +20,7 @@ import axiosConfig from "../../../axiosConfig"
 
     const deleteProduct = async() =>{
         try {
-            await axiosConfig.delete('/produto/' + idProduto).then((response) => {
+            await axiosConfig.delete('/produto/' + idProduto).then((response: any) => {
                 toast.success("Produto deletado com sucesso")
                 setTimeout(() => {
                   window.location.reload();

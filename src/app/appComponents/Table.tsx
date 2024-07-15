@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
 import Image from "next/image"
@@ -45,7 +46,7 @@ export default function TableComponent(){
         } else{
             const newPage = page - 1
             setPage(newPage)
-            axiosConfig.get(`/produto?page=${newPage}`).then((response) => {
+            axiosConfig.get(`/produto?page=${newPage}`).then((response : any) => {
                 setProdutosList(response.data)
                 console.log(page)
             })
@@ -55,7 +56,7 @@ export default function TableComponent(){
     const nextPage = async() => {
         const newPage = page + 1
         setPage(newPage)
-        await axiosConfig.get(`/produto?page=${newPage}`).then((response) => {
+        await axiosConfig.get(`/produto?page=${newPage}`).then((response : any) => {
             if(response.data.length > 0){
                 setProdutosList(response.data)
                 console.log(page)
