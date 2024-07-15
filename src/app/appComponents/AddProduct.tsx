@@ -53,7 +53,7 @@ const FormSchema = z.object({
         defaultValues: {
             nome: "",
             descricao: "",
-            preco: null
+            preco: 0
         },
       })
     
